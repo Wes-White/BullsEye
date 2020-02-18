@@ -17,11 +17,13 @@ struct ContentView: View {
         HStack {
             VStack {
                 // Target Row
+                Spacer()
                 HStack {
                     Text("Put the bullseye as close as you can to:" )
                     Text("100")
             
                 }
+                Spacer()
                 
                 //Slider
                 HStack{
@@ -30,36 +32,40 @@ struct ContentView: View {
                     Text("100")
                 }
                 
-                
+                Spacer()
                 
                 //Button Row
               Button(action: {
                 print("Button pressed!")
                 self.alertIsVisible = true
               }) {
-                Text(/*@START_MENU_TOKEN@*/"Hit Me!"/*@END_MENU_TOKEN@*/)
+                Text("Hit me !!")
               }
                 
               .alert(isPresented: $alertIsVisible) { () -> Alert in
                 return Alert(title: Text("Hello there!"), message: Text("This is my first pop-up."), dismissButton: .default(Text("Awesome!")))
               }
                 
+                Spacer()
+                
                 //Score Row
                 HStack{
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                         Text("Start Over")
                     }
+                     Spacer()
                     Text("Score:")
                     Text("9999")
+                     Spacer()
                     Text("Round:")
                     Text("999")
-                    
+                     Spacer()
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                         Text("info")
                     }
 
                 }
-                
+                .padding(.bottom, 20)
             }
             
         }
