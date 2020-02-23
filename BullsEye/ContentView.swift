@@ -1,9 +1,9 @@
 //
 //  ContentView.swift
-//  BullsEye
+//  Bullseye
 //
-//  Created by Wesley Ryan on 2/6/20.
-//  Copyright © 2020 Wesley Ryan. All rights reserved.
+//  Created by Ray Wenderlich on 8/20/19.
+//  Copyright © 2019 Ray Wenderlich. All rights reserved.
 //
 
 import SwiftUI
@@ -11,68 +11,75 @@ import SwiftUI
 struct ContentView: View {
 
   @State var alertIsVisible: Bool = false
-    @State var sliderValue: Double = 50.0
+  @State var sliderValue: Double = 50.0
+  @State var target: Int = Int.random(in: 1...100)
  
   var body: some View {
-    HStack {
-        HStack {
-            VStack {
-                // Target Row
-                Spacer()
-                HStack {
-                    Text("Put the bullseye as close as you can to:" )
-                    Text("\(self.sliderValue)")
-            
-                }
-                Spacer()
-                
-                //Slider
-                HStack{
-                    Text("1")
-                    Slider(value: self.$sliderValue, in: 1...100)
-                    Text("100")
-                }
-                
-                Spacer()
-                
-                //Button Row
-              Button(action: {
-                print("Button pressed!")
-                self.alertIsVisible = true
-              }) {
-                Text("Hit me !!")
-              }
-                
-              .alert(isPresented: $alertIsVisible) { () -> Alert in
-                return Alert(title: Text("Hello there!"), message: Text("The slider's value is \(self.sliderValue)."), dismissButton: .default(Text("try again")))
-              }
-                
-                Spacer()
-                
-                //Score Row
-                HStack{
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                        Text("Start Over")
-                    }
-                     Spacer()
-                    Text("Score:")
-                    Text("9999")
-                     Spacer()
-                    Text("Round:")
-                    Text("999")
-                     Spacer()
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                        Text("info")
-                    }
-
-                }
-                .padding(.bottom, 20)
-            }
-            
+    VStack {
+      Spacer()
+      
+      // Target row
+      HStack {
+        Text("Put the bullseye as close as you can to:")
+        Text("\(self.target)")
+      }
+      Spacer()
+      
+      // Slider row
+      HStack {
+        Text("1")
+        Slider(value: self.$sliderValue, in: 1...100)
+        Text("100")
+      }
+      Spacer()
+      
+      // Button row
+      Button(action: {
+        print("Button pressed!")
+        self.alertIsVisible = true
+      }) {
+        Text(/*@START_MENU_TOKEN@*/"Hit Me!"/*@END_MENU_TOKEN@*/)
+      }
+      .alert(isPresented: $alertIsVisible) { () -> Alert in
+        var roundedValue: Int = Int(self.sliderValue.rounded())
+        return Alert(title: Text("Hello there!"), message: Text(
+          "The slider's value is \(roundedValue).\n" +
+          "You scored \(self.pointsForCurrentRound()) points this round."
+        ), dismissButton: .default(Text("Awesome!")))
+      }
+      Spacer()
+      
+      // Score row
+      HStack {
+        Button(action: {}) {
+          Text("Start Over")
         }
-        
+        Spacer()
+        Text("Score:")
+        Text("999999")
+        Spacer()
+        Text("Round:")
+        Text("999")
+        Spacer()
+        Button(action: {}) {
+          Text("Info")
+        }
+      }
+      .padding(.bottom, 20)
     }
   }
+    
+    func pointsForCurrentRound() -> Int {
+        var roundedValue: Int = Int(self.sliderValue.rounded())
+        var difference: Int = self.target - roundedValue
+        
+        if difference < 0 {
+            difference = difference * -1
+        }
+        var awardedPoints: Int = 100 - difference
+        
+        return awardedPoints
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -80,3 +87,17 @@ struct ContentView_Previews: PreviewProvider {
     ContentView().previewLayout(.fixed(width: 896, height: 414))
   }
 }
+
+
+/* func findDifference() -> Int {
+
+if sliderValue >= guess {
+ 
+ return sliderValue - guess
+ } else {
+ return guess - sliderValue
+ 
+ }
+ }
+ */
+ 
