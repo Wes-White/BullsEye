@@ -41,9 +41,9 @@ struct ContentView: View {
         Text(/*@START_MENU_TOKEN@*/"Hit Me!"/*@END_MENU_TOKEN@*/)
       }
       .alert(isPresented: $alertIsVisible) { () -> Alert in
-        var roundedValue: Int = Int(self.sliderValue.rounded())
+        
         return Alert(title: Text("Hello there!"), message: Text(
-          "The slider's value is \(roundedValue).\n" +
+          "The slider's value is \(sliderValueRounded()).\n" +
           "You scored \(self.pointsForCurrentRound()) points this round."
         ), dismissButton: .default(Text("Awesome!")))
       }
@@ -68,17 +68,13 @@ struct ContentView: View {
       .padding(.bottom, 20)
     }
   }
+    func sliderValueRounded() -> Int {
+        return Int(self.sliderValue.rounded())
+    }
     
     func pointsForCurrentRound() -> Int {
-        var roundedValue: Int = Int(self.sliderValue.rounded())
-        var difference: Int = self.target - roundedValue
-        
-        if difference < 0 {
-            difference = difference * -1
-        }
-        var awardedPoints: Int = 100 - difference
-        
-        return awardedPoints
+        return 100 - abs(target - sliderValueRounded())
+       //abs() is func that gives an absolute num. no matter if negative or postitive.
     }
 }
 
@@ -88,16 +84,4 @@ struct ContentView_Previews: PreviewProvider {
   }
 }
 
-
-/* func findDifference() -> Int {
-
-if sliderValue >= guess {
- 
- return sliderValue - guess
- } else {
- return guess - sliderValue
- 
- }
- }
- */
  
