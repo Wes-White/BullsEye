@@ -14,43 +14,43 @@ struct ContentView: View {
     struct LabelStyle: ViewModifier{
         func body(content: Content) -> some View {
             return content
-            .foregroundColor(Color.white)
-            .shadow(color: Color.black, radius: 5, x: 2, y: 2)
-            .font(Font.custom("Arial Rounded MT Bold", size: 19))
+                .foregroundColor(Color.white)
+                .shadow(color: Color.black, radius: 5, x: 2, y: 2)
+                .font(Font.custom("Arial Rounded MT Bold", size: 19))
         }
     }
     
     struct ValueStyle: ViewModifier{
         func body(content: Content) -> some View {
             return content
-            .foregroundColor(Color.yellow)
-            .shadow(color: Color.black, radius: 5, x: 2, y: 2)
-            .font(Font.custom("Arial Rounded MT Bold", size: 24))
+                .foregroundColor(Color.yellow)
+                .shadow(color: Color.black, radius: 5, x: 2, y: 2)
+                .font(Font.custom("Arial Rounded MT Bold", size: 24))
         }
     }
     
     struct Shadow: ViewModifier{
-          func body(content: Content) -> some View {
-              return content
-              .shadow(color: Color.black, radius: 5, x: 2, y: 2)
-          }
-      }
+        func body(content: Content) -> some View {
+            return content
+                .shadow(color: Color.black, radius: 5, x: 2, y: 2)
+        }
+    }
     
     struct ButtonLargeText: ViewModifier{
-             func body(content: Content) -> some View {
-                 return content
-                    .foregroundColor(Color.black)
-                    .font(Font.custom("Arial Rounded MT Bold", size: 18))
-             }
-         }
+        func body(content: Content) -> some View {
+            return content
+                .foregroundColor(Color.black)
+                .font(Font.custom("Arial Rounded MT Bold", size: 18))
+        }
+    }
     
     struct ButtonSmallText: ViewModifier{
-             func body(content: Content) -> some View {
-                 return content
-                    .foregroundColor(Color.black)
-                    .font(Font.custom("Arial Rounded MT Bold", size: 12))
-             }
-         }
+        func body(content: Content) -> some View {
+            return content
+                .foregroundColor(Color.black)
+                .font(Font.custom("Arial Rounded MT Bold", size: 12))
+        }
+    }
     
     
     var body: some View {
